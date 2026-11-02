@@ -37,3 +37,39 @@ BEGIN
     FROM dbo.Usuarios WHERE Id = CONVERT(INT, SCOPE_IDENTITY());
 END;
 GO
+
+/*
+  Herramienta administrativa local para recuperar el acceso a una cuenta.
+  La contraseña se genera y se convierte a Argon2id desde Python; nunca se
+  envía en texto plano a SQL Server.
+*/
+CREATE OR ALTER PROCEDURE dbo.usp_Usuario_ActualizarPassword
+    @Username NVARCHAR(50),
+    @PasswordHash NVARCHAR(255)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SET XACT_ABORT ON;
+
+    SET @Username = LTRIM(RTRIM(@Username));
+
+    IF @Username IS NULL OR LEN(@Username) = 0 OR LEN(@Username) > 50
+       OR @PasswordHash IS NULL OR LEN(@PasswordHash) = 0 OR LEN(@PasswordHash) > 255
+        THROW 50010, N'DATOS_INVALIDOS|El usuario y el hash son obligatorios y deben respetar sus longitudes.', 1;
+
+    IF NOT EXISTS (
+        SELECT 1
+        FROM dbo.Usuarios
+        WHERE Username = @Username
+    )
+        THROW 50001, N'USUARIO_NO_ENCONTRADO|El usuario no existe.', 1;
+
+    UPDATE dbo.Usuarios
+    SET PasswordHash = @PasswordHash
+    WHERE Username = @Username;
+
+    SELECT Id, Username, Activo
+    FROM dbo.Usuarios
+    WHERE Username = @Username;
+END;
+GO
