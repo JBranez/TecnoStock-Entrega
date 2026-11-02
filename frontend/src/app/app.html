@@ -1,0 +1,12 @@
+@if (auth.user()) {
+  <app-toast-host />
+  <div class="app-shell">
+    <app-navbar />
+    <main class="app-main">
+      <div class="page-content"><router-outlet /></div>
+      <app-footer />
+    </main>
+  </div>
+} @else {
+  <router-outlet />
+}

@@ -1,0 +1,47 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 252px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.app-main {
+  display: flex;
+  min-width: 0;
+  min-height: 100vh;
+  flex-direction: column;
+  padding: 38px clamp(24px, 4vw, 64px) 20px;
+}
+
+.page-content {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  flex: 1;
+}
+
+app-footer {
+  width: 100%;
+  max-width: 1440px;
+  margin: 42px auto 0;
+}
+
+@media (max-width: 760px) {
+  .app-shell {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app-main {
+    min-height: auto;
+    padding: 30px 20px 18px;
+  }
+
+  app-footer {
+    margin-top: 30px;
+  }
+}

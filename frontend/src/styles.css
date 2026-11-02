@@ -1,0 +1,44 @@
+:root {
+  color-scheme: light;
+  --graphite: #202a32;
+  --acid: #b7e34b;
+  --ivory: #f2f0e8;
+  --terracotta: #e58b70;
+  --white: #ffffff;
+  --ink-muted: #788087;
+  --line: #e7e5dc;
+  --surface: #fbfaf6;
+  --shadow: 0 10px 30px rgb(32 42 50 / 5%);
+
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: var(--ivory);
+  color: var(--graphite);
+}
+
+button,
+a {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--acid);
+  color: var(--graphite);
+}

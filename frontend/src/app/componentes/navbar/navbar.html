@@ -1,0 +1,34 @@
+<div class="mobile-topbar">
+  <button class="mobile-menu-toggle" type="button" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()" aria-controls="tecnostock-navigation" aria-label="Abrir menú de navegación">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+  </button>
+  <a class="mobile-brand" routerLink="/" (click)="closeMenu()">TECNO<span>STOCK</span></a>
+  <button class="mobile-signout" type="button" (click)="logout()">Salir</button>
+</div>
+@if (menuOpen()) {
+  <button class="mobile-backdrop" type="button" aria-label="Cerrar menú" (click)="closeMenu()"></button>
+}
+<aside id="tecnostock-navigation" class="sidebar" [class.open]="menuOpen()">
+  <a class="brand" routerLink="/" aria-label="TecnoStock, ir al dashboard">
+    <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><path d="M8 11h24v5H8zM8 19h15v5H8zM8 27h24v5H8z" fill="currentColor" /><path d="M26 19h6v5h-6z" fill="currentColor" /></svg></span>
+    <span class="brand-copy"><strong>TECNO<span>STOCK</span></strong><small>S.A.C. · INVENTARIO</small></span>
+  </a>
+  <button class="mobile-logout" type="button" (click)="logout()">Cerrar sesión</button>
+  <div class="nav-caption">ESPACIO DE TRABAJO</div>
+  <nav class="navigation" aria-label="Navegación principal">
+    @for (item of items; track item.path) {
+      <a class="nav-link" (click)="closeMenu()" [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: item.exact ?? false }" ariaCurrentWhenActive="page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path [attr.d]="item.icon" /></svg>
+        <span>{{ item.label }}</span>
+      </a>
+    }
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="inventory-note"><span class="note-icon" aria-hidden="true">✓</span><p>Conectado a<br><strong>SQL Server</strong></p></div>
+    @if (auth.user(); as user) {
+      <div class="user-info"><span class="user-avatar">{{ user.nombre_completo.slice(0, 1).toUpperCase() }}</span><span><strong>{{ user.nombre_completo }}</strong><small>{{ user.username }}</small></span></div>
+    }
+    <button class="logout-button" type="button" (click)="logout()">Cerrar sesión <span aria-hidden="true">↗</span></button>
+    <p class="sidebar-version">TECNO STOCK <span>·</span> 01.0</p>
+  </div>
+</aside>
