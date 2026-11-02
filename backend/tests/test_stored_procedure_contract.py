@@ -13,6 +13,7 @@ EXPECTED_PROCEDURES = {
     "usp_Producto_ListarStockBajo",
     "usp_Movimiento_RegistrarEntrada", "usp_Movimiento_RegistrarSalida", "usp_Movimiento_Listar",
     "usp_Dashboard_ObtenerIndicadores",
+    "usp_Usuario_ActualizarPassword",
 }
 
 
