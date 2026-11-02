@@ -1,0 +1,32 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  color: var(--ink-muted);
+  font-size: 0.71rem;
+}
+
+.footer strong {
+  color: var(--graphite);
+  font-size: 0.67rem;
+  letter-spacing: 0.07em;
+}
+
+.footer-separator {
+  padding: 0 4px;
+  color: var(--terracotta);
+}
+
+.footer-year {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 460px) {
+  .footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
